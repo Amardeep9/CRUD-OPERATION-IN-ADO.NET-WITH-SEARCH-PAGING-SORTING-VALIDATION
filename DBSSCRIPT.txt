@@ -1,0 +1,106 @@
+Create procedure spAddStudent     
+(    
+    @Name VARCHAR(20),     
+    @Emailid VARCHAR(20),    
+    @Password VARCHAR(20),    
+    @ConfirmPassword VARCHAR(20),
+	@DOB datetime     
+)    
+as     
+Begin     
+    Insert into tblStudent (Name,Emailid,Password, ConfirmPassword,DOB)     
+    Values (@Name,@Emailid,@Password, @ConfirmPassword,@DOB)     
+End
+
+
+Create table tblStudent(  
+    RollNo int IDENTITY(1,1) NOT NULL,    
+    Name  varchar(20) NOT NULL,    
+    Emailid varchar(20) NOT NULL,    
+    PassWord varchar(20) NOT NULL,    
+    ConfirmPassword  varchar(20) NOT NULL,    
+    DOB datetime NOT NULL    
+)
+
+
+
+Create procedure spUpdateStudent      
+(      
+   @RollNo INTEGER ,    
+   @Name VARCHAR(20),     
+   @Emailid VARCHAR(20),    
+   @PassWord VARCHAR(20),    
+   @ConfirmPassword VARCHAR(20),
+   @DOB datetime    
+)      
+as      
+begin      
+   Update tblStudent       
+   set Name=@Name,      
+   Emailid=@Emailid,      
+   PassWord=@PassWord,    
+   ConfirmPassword=@ConfirmPassword,   
+      DOB=@DOB
+   where RollNo=@RollNo      
+End
+
+
+
+
+USE [Mydatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[spDeleteStudent]    Script Date: 26-Jul-19 8:17:52 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[spDeleteStudent]     
+(      
+   @RollNo int      
+)      
+as       
+begin      
+   Delete from tblStudent where RollNo=@RollNo      
+End
+
+
+
+
+
+
+USE [Mydatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllStudent]    Script Date: 26-Jul-19 8:18:20 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[spGetAllStudent]    
+as    
+Begin    
+    select *    
+    from tblStudent 
+    order by RollNo    
+End
+
+
+
+
+USE [Mydatabase]
+GO
+/****** Object:  StoredProcedure [dbo].[spGetStudentbyRollNo]    Script Date: 26-Jul-19 8:18:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[spGetStudentbyRollNo]   
+@RollNo int=0
+as    
+Begin    
+    select *    
+    from tblStudent 
+	where RollNo=@RollNo
+    order by RollNo    
+End
+
+
